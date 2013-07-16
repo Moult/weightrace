@@ -337,7 +337,7 @@ FileETag None
 # Options +SymLinksIfOwnerMatch
   RewriteEngine On
 # RewriteBase /
-  RewriteBase /vtemplate/
+  RewriteBase /weightrace/
 </IfModule>
 
 
