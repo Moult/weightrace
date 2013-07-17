@@ -36,7 +36,32 @@ class View_Static_Homepage extends View_Layout
             ),
             array(
                 'name' => 'Walter Biggins'
+            ),
+            array(
+                'name' => 'Walter Biggins'
+            ),
+            array(
+                'name' => 'Walter Biggins'
+            ),
+            array(
+                'name' => 'Walter Biggins'
+            ),
+            array(
+                'name' => 'Walter Biggins'
+            ),
+            array(
+                'name' => 'Walter Biggins'
             )
         );
+    }
+
+    public function start_date()
+    {
+        return date('d/m/Y', strtotime('today'));
+    }
+
+    public function end_date()
+    {
+        return date('d/m/Y', strtotime('next month'));
     }
 }

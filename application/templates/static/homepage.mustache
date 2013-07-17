@@ -1,3 +1,5 @@
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Snippet|Telex|Expletus+Sans:400,500|Roboto:400,300' rel='stylesheet' type='text/css'>
 <header>
     <h1>
         <em>Weight</em>Race
@@ -10,8 +12,7 @@
     </h2>
     <form>
         <label for="competition_name">Name your challenge now:</label>
-        <input type=="text">
-        <button type="button">Continue</button>
+        <input type="text" name="competition_name" value="Flabicide 2013">
         <h3>
             Prepare your contestants (up to 4)
         </h3>
@@ -22,37 +23,41 @@
                 <span>{{tagline}}</span>
             </legend>
             <label for="racer{{n}}_name">Name:</label>
-            <input type="text" name="racer{{n}}_name">
+            <input type="text" name="racer{{n}}_name" value="Name...">
             <label for="racer{{n}}_weight">Current weight:</label>
-            <input type="text" name="racer{{n}}_weight">
+            <input type="text" name="racer{{n}}_weight" value="Weight in kg...">
             <label for="racer{{n}}_height">Height:</label>
-            <input type="text" name="racer{{n}}_height">
+            <input type="text" name="racer{{n}}_height" value="Height in cm...">
             <label for="racer{{n}}_gender">Gender:</label>
+            <span class="select">
             <select name="racer{{n}}_gender">
                 <option value="1">Male</option>
                 <option value="0">Female</option>
             </select>
+            </span>
             <label for="racer{{n}}_ethnicity">Ethnicity:</label>
+            <span class="select">
             <select name="racer{{n}}_ethnicity">
                 <option value="asian">Asian</option>
                 <option value="black">Black</option>
                 <option value="hispanic">Hispanic</option>
                 <option value="white">White</option>
             </select>
+            </span>
             <label for="racer{{n}}_goal_weight">Goal weight:</label>
-            <input type="text" name="racer{{n}}_goal_weight">
+            <input type="text" name="racer{{n}}_goal_weight" value="Goal weight in kg...">
             <label for="racer{{n}}_email">Email:</label>
-            <input type="text" name="racer{{n}}_email">
+            <input type="text" name="racer{{n}}_email" value="Email...">
         </fieldset>
         {{/racers}}
         <h3>
             Choose a start and end date:
         </h3>
         <label for="start_date">Start date:</label>
-        <input type="text" name="start_date">
+        <input class="datepicker" type="text" name="start_date" value="{{start_date}}">
         <span>...until...</span>
         <label for="end_date">End date:</label>
-        <input type="text" name="end_date">
+        <input class="datepicker" type="text" name="end_date" value="{{end_date}}">
         <input type="submit" name="submit" value="Ready. Set. Go.">
     </form>
 </section>
