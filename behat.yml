@@ -2,7 +2,7 @@ default:
   extensions:
     Behat\MinkExtension\Extension:
       show_cmd: opera-next %s
-      base_url: http://localhost/vtemplate
+      base_url: http://localhost/weightrace
       browser_name: chrome
       goutte: ~
       selenium2: ~
