@@ -129,9 +129,16 @@ Kohana::modules(array(
  */
 Route::set('homepage', '')
     ->defaults(array(
-        'controller' => 'static',
-        'action'     => 'homepage',
+        'controller' => 'race',
+        'action'     => 'create',
     ));
+
+Route::set('view', 'view')
+    ->defaults(array(
+        'controller' => 'race',
+        'action'     => 'view',
+    ));
+
 
 /**
  * CMS module routes
