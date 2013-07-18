@@ -4,3 +4,6 @@
 [submodule "modules/kostache"]
 	path = modules/kostache
 	url = git://github.com/zombor/KOstache.git
+[submodule "application/vendor/Welgam/Core"]
+	path = application/vendor/Welgam/Core
+	url = https://github.com/Moult/welgam.git
