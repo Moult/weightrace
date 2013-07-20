@@ -1,58 +1,140 @@
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load('visualization', '1', {packages: ['corechart']});
+</script>
+<script type="text/javascript">
+function drawVisualization() {
+  // Create and populate the data table.
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Date');
+  {{{add_columns}}}
+  data.addRows([
+    {{{add_rows}}}
+  ]);
+
+  // Create and draw the visualization.
+  new google.visualization.LineChart(document.getElementById('visualization')).
+      draw(data, {
+        series:{3:{targetAxisIndex:1}},
+        width: 978, height: 300, lineWidth: 2, pointSize: 3, theme:'maximized', interpolateNulls: true,
+        colors:['#db1900','#db1900','#036f88','#036f88','#db6d00','#db6d00','#00A42B','#00A42B'],
+        legend: { position: 'none' },
+        vAxis: {maxValue: {{max_value}}, minValue:{{min_value}}}
+            }
+          );
+}
+google.setOnLoadCallback(drawVisualization);
+</script>
+
+
 <header id="view">
     <h1>
-        <em>Weight</em>Race presents: <strong>Flabicide 2013</strong>
+        <em>Weight</em>Race presents: <strong>{{competition_name}}</strong>
     </h1>
+    <h2>
+        <strong>At stake:</strong><br>
+        {{stake}}
+    </h2>
+    {{#has_started}}
     <p>
-        You have <strong>40</strong> days left. Make each one count.
+        You have <strong>{{days_left}}</strong> days left. Make each one count.
     </p>
+    {{/has_started}}
 </header>
 <nav>
-    <p><strong>WeightRace.net Alpha version</strong></p>
-    <p>Hello, <strong>Walter Biggins</strong></p>
+    <p><strong><a href="{{baseurl}}">WeightRace.net Alpha version</a></strong></p>
+    <button type="submit" id="bookmark">Bookmark this page for easy access</button>
+    <p>Hello, <strong>{{auth_name}}</strong></p>
 </nav>
-<section id="racers">
+{{#has_errors}}
+<div class="error">
+    <p>
+        Uh oh! We've encountered the following problems when updating your
+        competition status:
+    </p>
     <ul>
-        <li>
-            <h1>Walter Biggins</h1>
-            <p>
-                <strong>10</strong>kg left<br>
-                <strong>3rd</strong> place<br>
-                <strong>14</strong> awards<br>
-                <strong>230</strong> wobbly bits
-            </p>
-        </li>
-        <li>
-            <h1>Walter Biggins</h1>
-            <p>
-                <strong>10</strong>kg left<br>
-                <strong>3rd</strong> place<br>
-                <strong>14</strong> awards<br>
-                <strong>230</strong> wobbly bits
-            </p>
-        </li>
-        <li>
-            <h1>Walter Biggins</h1>
-            <p>
-                <strong>10</strong>kg left<br>
-                <strong>3rd</strong> place<br>
-                <strong>14</strong> awards<br>
-                <strong>230</strong> wobbly bits
-            </p>
-        </li>
-        <li>
-            <h1>Walter Biggins</h1>
-            <p>
-                <strong>10</strong>kg left<br>
-                <strong>3rd</strong> place<br>
-                <strong>14</strong> awards<br>
-                <strong>230</strong> wobbly bits
-            </p>
-        </li>
+        {{#errors}}
+        <li>{{message}}</li>
+        {{/errors}}
     </ul>
+</div>
+{{/has_errors}}
+<section id="racers">
+    <form action="" method="post">
+        <ul>
+            {{#racers}}
+            <li>
+                <h1>{{name}}</h1>
+                <p>
+                    <strong>{{position}}</strong> place<br>
+                    <strong>{{current_weight}}</strong> kg currently<br>
+                    <strong>{{goal}}</strong> kg goal<br>
+                    <strong>{{kg_left}}</strong> kg left<br>
+                    <strong>{{awards}}</strong> awards<br>
+                    <strong>{{points}}</strong> wobbly bits
+                </p>
+            </li>
+            {{/racers}}
+            {{#potential_contestants}}
+            <li>
+                <fieldset>
+                    <label for="racer{{n}}_name">Name:</label>
+                    <input type="text" name="racer{{n}}_name" value="{{name}}">
+                    <label for="racer{{n}}_weight">Current weight:</label>
+                    <input type="text" name="racer{{n}}_weight" value="{{weight}}">
+                    <label for="racer{{n}}_height">Height:</label>
+                    <input type="text" name="racer{{n}}_height" value="{{height}}">
+                    <label for="racer{{n}}_gender">Gender:</label>
+                    <span class="select">
+                    <select name="racer{{n}}_gender">
+                        <option value="1" {{#is_male}}selected="selected"{{/is_male}}>Male</option>
+                        <option value="0" {{#is_female}}selected="selected"{{/is_female}}>Female</option>
+                    </select>
+                    </span>
+                    <label for="racer{{n}}_ethnicity">Ethnicity:</label>
+                    <span class="select">
+                    <select name="racer{{n}}_ethnicity">
+                        <option value="asian" {{#is_asian}}selected="selected"{{/is_asian}}>Asian</option>
+                        <option value="black" {{#is_black}}selected="selected"{{/is_black}}>Black</option>
+                        <option value="hispanic" {{#is_hispanic}}selected="selected"{{/is_hispanic}}>Hispanic</option>
+                        <option value="white" {{#is_white}}selected="selected"{{/is_white}}>White</option>
+                    </select>
+                    </span>
+                    <label for="racer{{n}}_goal_weight">Goal weight:</label>
+                    <input type="text" name="racer{{n}}_goal_weight" value="{{goal_weight}}">
+                    <label for="racer{{n}}_email">Email:</label>
+                    <input type="text" name="racer{{n}}_email" value="{{email}}">
+                    <button type="submit"><img src="{{baseurl}}images/add.png" alt="Plus icon">Add contestant</button>
+                </fieldset>
+            </li>
+            {{/potential_contestants}}
+        </ul>
+      </form>
 </section>
+{{#add_columns}}
 <section id="graph">
-    <img src="{{baseurl}}images/graph.png">
+    <div id="visualization" style="width: 978px; height: 300px;"></div>
 </section>
+<section id="update">
+    {{#has_updated}}
+    <h1>
+        Awesome. You've updated your weight today, {{auth_name}}.
+    </h1>
+    {{/has_updated}}
+    {{^has_updated}}
+    <h1>
+        Let's update your weight today, {{auth_name}}.
+    </h1>
+    <form action="" method="post">
+        <label for="update_weight">Today's weight</label>
+        <input type="text" name="update_weight" value="Weight in kg...">
+        <label for="update_food">Food log</label>
+        <textarea name="update_food">Today, I ate ... (optional)</textarea>
+        <input type="submit" name="submit" value="Update my weight">
+    </form>
+    {{/has_updated}}
+</section>
+{{/add_columns}}
 <section id="rules">
     <h1>
         The rules of the game
@@ -99,26 +181,32 @@
     <ul>
         <li>
             <h2>The Attendance Certificate</h2>
+            <p><strong>10</strong> wobbly bits</p>
             <p>Awarded every time you make an update. Give yourself a pat on the back.</p>
         </li>
         <li>
             <h2>The Healthy Heart</h2>
+            <p><strong>5</strong> wobbly bits</p>
             <p>Awarded whenever your update falls within your healthy <a href="http://en.wikipedia.org/wiki/Body_mass_index">BMI zone</a>.</p>
         </li>
         <li>
             <h2>The Progress Check</h2>
+            <p><strong>3</strong> wobbly bits</p>
             <p>Awarded every time you move closer towards your goal.</p>
         </li>
         <li>
             <h2>The Dietary Detail</h2>
+            <p><strong>1</strong> wobbly bit</p>
             <p>Awarded every time your update includes food information.</p>
         </li>
         <li>
             <h2>The Regular Combo</h2>
+            <p><strong>1</strong> wobbly bit</p>
             <p>Awarded if you made an update yesterday as well.</p>
         </li>
         <li>
-            <h2>The Pack Leader</h2>
+            <h2>The Flab Pack Leader</h2>
+            <p><strong>2</strong> wobbly bits</p>
             <p>Awarded when you are in first place.</p>
         </li>
     </ul>
