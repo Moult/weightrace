@@ -6,24 +6,121 @@ defined('SYSPATH') OR die('No direct script access.');
  */
 class View_Race_Create extends View_Layout
 {
+    public $competition_name = 'Flabicide 2013';
+    public $racer1_name = 'Name...';
+    public $racer1_weight = 'Weight in kg...';
+    public $racer1_height = 'Height in cm...';
+    public $racer1_goal_weight = 'Goal weight in kg...';
+    public $racer1_email = 'Email...';
+    public $racer1_gender = 1;
+    public $racer1_ethnicity = 'asian';
+    public $racer2_name = 'Name...';
+    public $racer2_weight = 'Weight in kg...';
+    public $racer2_height = 'Height in cm...';
+    public $racer2_goal_weight = 'Goal weight in kg...';
+    public $racer2_email = 'Email...';
+    public $racer2_gender = 1;
+    public $racer2_ethnicity = 'asian';
+    public $racer3_name = 'Name...';
+    public $racer3_weight = 'Weight in kg...';
+    public $racer3_height = 'Height in cm...';
+    public $racer3_goal_weight = 'Goal weight in kg...';
+    public $racer3_email = 'Email...';
+    public $racer3_gender = 1;
+    public $racer3_ethnicity = 'asian';
+    public $racer4_name = 'Name...';
+    public $racer4_weight = 'Weight in kg...';
+    public $racer4_height = 'Height in cm...';
+    public $racer4_goal_weight = 'Goal weight in kg...';
+    public $racer4_email = 'Email...';
+    public $racer4_gender = 1;
+    public $racer4_ethnicity = 'asian';
+    public $stake = 'The loser will have to ...';
+
+    public function has_competition_errors()
+    {
+        return (bool) isset($this->competition_errors);
+    }
+
+    public function competition_name_error()
+    {
+        return (bool) in_array('name', $this->competition_errors);
+    }
+
+    public function competition_start_date_error()
+    {
+        return (bool) in_array('start_date', $this->competition_errors);
+    }
+
+
+    public function competition_end_date_error()
+    {
+        return (bool) in_array('end_date', $this->competition_errors);
+    }
+
+
     public function racers()
     {
         return array(
             array(
                 'n' => 1,
-                'tagline' => 'The proud initiator'
+                'tagline' => 'The proud initiator',
+                'name' => $this->racer1_name,
+                'weight' => $this->racer1_weight,
+                'height' => $this->racer1_height,
+                'is_male' => ($this->racer1_gender == 1),
+                'is_female' => ($this->racer1_gender == 0),
+                'is_asian' => ($this->racer1_ethnicity == 'asian'),
+                'is_black' => ($this->racer1_ethnicity == 'black'),
+                'is_hispanic' => ($this->racer1_ethnicity == 'hispanic'),
+                'is_white' => ($this->racer1_ethnicity == 'white'),
+                'goal_weight' => $this->racer1_goal_weight,
+                'email' => $this->racer1_email
             ),
             array(
                 'n' => 2,
-                'tagline' => 'The daring nemesis'
+                'tagline' => 'The daring nemesis',
+                'name' => $this->racer2_name,
+                'weight' => $this->racer2_weight,
+                'height' => $this->racer2_height,
+                'is_male' => ($this->racer2_gender == 1),
+                'is_female' => ($this->racer2_gender == 0),
+                'is_asian' => ($this->racer2_ethnicity == 'asian'),
+                'is_black' => ($this->racer2_ethnicity == 'black'),
+                'is_hispanic' => ($this->racer2_ethnicity == 'hispanic'),
+                'is_white' => ($this->racer2_ethnicity == 'white'),
+                'goal_weight' => $this->racer2_goal_weight,
+                'email' => $this->racer2_email
             ),
             array(
                 'n' => 3,
-                'tagline' => 'The crafty third-party'
+                'tagline' => 'The crafty third-party',
+                'name' => $this->racer3_name,
+                'weight' => $this->racer3_weight,
+                'height' => $this->racer3_height,
+                'is_male' => ($this->racer3_gender == 1),
+                'is_female' => ($this->racer3_gender == 0),
+                'is_asian' => ($this->racer3_ethnicity == 'asian'),
+                'is_black' => ($this->racer3_ethnicity == 'black'),
+                'is_hispanic' => ($this->racer3_ethnicity == 'hispanic'),
+                'is_white' => ($this->racer3_ethnicity == 'white'),
+                'goal_weight' => $this->racer3_goal_weight,
+                'email' => $this->racer3_email
             ),
             array(
                 'n' => 4,
-                'tagline' => 'The stealthy underdog'
+                'tagline' => 'The stealthy underdog',
+                'name' => $this->racer4_name,
+                'weight' => $this->racer4_weight,
+                'height' => $this->racer4_height,
+                'is_male' => ($this->racer4_gender == 1),
+                'is_female' => ($this->racer4_gender == 0),
+                'is_asian' => ($this->racer4_ethnicity == 'asian'),
+                'is_black' => ($this->racer4_ethnicity == 'black'),
+                'is_hispanic' => ($this->racer4_ethnicity == 'hispanic'),
+                'is_white' => ($this->racer4_ethnicity == 'white'),
+                'goal_weight' => $this->racer4_goal_weight,
+                'email' => $this->racer4_email
             )
         );
     }
@@ -57,11 +154,17 @@ class View_Race_Create extends View_Layout
 
     public function start_date()
     {
-        return date('d/m/Y', strtotime('today'));
+        if ( ! isset($this->start_date))
+            return date('d/m/Y', strtotime('today'));
+        else
+            return $this->start_date;
     }
 
     public function end_date()
     {
-        return date('d/m/Y', strtotime('next month'));
+        if ( ! isset($this->end_date))
+            return date('d/m/Y', strtotime('next month'));
+        else
+            return $this->end_date;
     }
 }

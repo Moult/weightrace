@@ -39,6 +39,7 @@ setlocale(LC_ALL, 'en_US.utf-8');
  * @link http://www.php.net/manual/function.spl-autoload-register
  */
 spl_autoload_register(array('Kohana', 'auto_load'));
+spl_autoload_register(function($class) { Kohana::auto_load($class, 'vendor/Welgam/Core/src'); });
 
 /**
  * Optionally, you can enable a compatibility auto-loader for use with
@@ -111,7 +112,7 @@ Kohana::modules(array(
     // 'auth'       => MODPATH.'auth',       // Basic authentication
     // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
     // 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-    // 'database'   => MODPATH.'database',   // Database access
+       'database'   => MODPATH.'database',   // Database access
     // 'image'      => MODPATH.'image',      // Image manipulation
     // 'minion'     => MODPATH.'minion',     // CLI Tasks
     // 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
@@ -119,7 +120,7 @@ Kohana::modules(array(
     // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
        'kostache'   => MODPATH.'kostache',   // Mustache templating
        'errorpage'  => MODPATH.'errorpage',  // Display custom 404 error pages
-    // 'driver'     => MODPATH.'driver',     // Base set of drivers
+       'driver'     => MODPATH.'driver',     // Base set of drivers
     // 'cms'        => MODPATH.'cms',        // CMS editor for template files
     ));
 
@@ -133,7 +134,7 @@ Route::set('homepage', '')
         'action'     => 'create',
     ));
 
-Route::set('view', 'view')
+Route::set('view', 'view/<competition_id>(/<racer_id>/<racer_password>)', array('competition_id' => '[0-9]*', 'racer_id' => '[0-9]*', 'racer_password' => '.*'))
     ->defaults(array(
         'controller' => 'race',
         'action'     => 'view',
