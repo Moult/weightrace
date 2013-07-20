@@ -24,6 +24,48 @@ $("input[name='competition_name']").blur( function() {
     }
 });
 
+$("input[name='stake']").focus( function() {
+    if ( $(this).val()=="The loser will have to ...") {
+        $(this).val("");
+        $(this).css("color", "#444");
+    }
+});
+
+$("input[name='stake']").blur( function() {
+    if ( $(this).val()=="") {
+        $(this).css("color", "#bbb");
+        $(this).val("The loser will have to ...");
+    }
+});
+
+$("input[name='update_weight']").focus( function() {
+    if ( $(this).val()=="Weight in kg...") {
+        $(this).val("");
+        $(this).css("color", "#444");
+    }
+});
+
+$("input[name='update_weight']").blur( function() {
+    if ( $(this).val()=="") {
+        $(this).css("color", "#bbb");
+        $(this).val("Weight in kg...");
+    }
+});
+
+$("textarea[name='update_food']").focus( function() {
+    if ( $(this).val()=="Today, I ate ... (optional)") {
+        $(this).val("");
+        $(this).css("color", "#444");
+    }
+});
+
+$("textarea[name='update_food']").blur( function() {
+    if ( $(this).val()=="") {
+        $(this).css("color", "#bbb");
+        $(this).val("Today, I ate ... (optional)");
+    }
+});
+
 var racers = [ "racer1", "racer2", "racer3", "racer4" ];
 var fields = [ "name", "weight", "height", "goal_weight", "email" ];
 var fieldValues = [ "Name...", "Weight in kg...", "Height in cm...", "Goal weight in kg...", "Email..." ];
@@ -47,4 +89,16 @@ $.each(racers, function(i, racer) {
 $(".datepicker").datepicker({
     minDate: 0,
     dateFormat: 'dd/mm/yy'
+});
+
+$('#bookmark').click(function() {
+    if (window.sidebar && window.sidebar.addPanel) { // Mozilla Firefox Bookmark
+        window.sidebar.addPanel(document.title,window.location.href,'');
+    } else if(window.external && window.external.AddFavorite) { // IE Favorite
+        window.external.AddFavorite(location.href,document.title);
+    } else if(window.opera && window.print) { // Opera Hotlist
+        alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != - 1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
+    } else { // webkit - safari/chrome
+        alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != - 1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
+    }
 });
