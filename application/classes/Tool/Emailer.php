@@ -4,7 +4,6 @@
  * Full license text in LICENSE file
  */
 
-
 class Tool_Emailer implements Welgam\Core\Tool\Emailer
 {
     private $instance;
@@ -12,7 +11,7 @@ class Tool_Emailer implements Welgam\Core\Tool\Emailer
     public function __construct()
     {
         $this->instance = Swift_Message::newInstance();
-        $this->instance->setFrom('noreply@thinkmoult.com');
+        $this->instance->setFrom('noreply@weightrace.net');
     }
 
     /**
