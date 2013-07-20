@@ -10,7 +10,6 @@ class View_Email_Competition_Notify_Body extends View_Layout
 
     public function racer_name()
     {
-        die(var_dump($this->data));
         return $this->data['racer_name'];
     }
 
