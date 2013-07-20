@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="vtemplate" default="main">
+<project name="weightrace" default="main">
     <property name="basedir" value="${project.basedir}" />
     <property name="appdir" value="${basedir}/application" />
     <property name="builddir" value="${basedir}/build" />
@@ -21,6 +21,9 @@
         <exec command="cp -r css/ ${builddir}/deploy/" passthru="true" />
         <exec command="cp -r js/ ${builddir}/deploy/" passthru="true" />
         <exec command="mkdir ${builddir}/deploy/modules/" passthru="true" />
+        <exec command="cp -r modules/database ${builddir}/deploy/modules/" passthru="true" />
+        <exec command="cp -r modules/minion ${builddir}/deploy/modules/" passthru="true" />
+        <exec command="cp -r modules/driver ${builddir}/deploy/modules/" passthru="true" />
         <exec command="cp -r modules/kostache ${builddir}/deploy/modules/" passthru="true" />
         <exec command="cp -r modules/errorpage ${builddir}/deploy/modules/" passthru="true" />
         <exec command="cp -r system/ ${builddir}/deploy/" passthru="true" />
@@ -38,8 +41,8 @@
         <exec command="mv ${builddir}/*.min.js ${builddir}/deploy/js/" passthru="true" />
 
         <!-- Configure for live site -->
-        <exec command="sed -i 's/\/vtemplate\//\//g' ${builddir}/deploy/application/bootstrap.php" passthru="true" />
-        <exec command="sed -i 's/RewriteBase \/vtemplate\//RewriteBase \//g' ${builddir}/deploy/.htaccess" passthru="true" />
+        <exec command="sed -i 's/\/weightrace\//\//g' ${builddir}/deploy/application/bootstrap.php" passthru="true" />
+        <exec command="sed -i 's/RewriteBase \/weightrace\//RewriteBase \//g' ${builddir}/deploy/.htaccess" passthru="true" />
         
         <!-- If server does not support FollowSymlinks
         <exec command="sed -i 's/  Options +FollowSymlinks/# Options +FollowSymlinks/g' ${builddir}/deploy/.htaccess" passthru="true" />
