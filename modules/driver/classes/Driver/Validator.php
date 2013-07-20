@@ -101,7 +101,7 @@ class Driver_Validator
      *                         the callback function
      * @return void
      */
-    public function callback($key, array $function, array $args)
+    public function callback($key, array $function, array $args = array())
     {
         $data = $this->instance->data();
         foreach ($args as $arg_key => $arg)
