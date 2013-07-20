@@ -25,3 +25,29 @@ classes in `application/classes/`.
 # Licenses
 
 This software is open-source and free software. See `licenses/` for full text.
+
+# Todo
+
+WeightRace is currently alpha software and so is incomplete. It is usable for
+testing purposes but the following features are missing:
+
+ * Make deployment fully automated on live server
+ * Document usage of composer on Welgam
+ * Backport following fixes to boilerplate libraries:
+   - Phing should include composer
+   - Fix validation driver
+   - Add email driver
+   - Add email ssl and default to/from configurations
+ * Remind me my login link feature not yet implemented
+ * Homepage latest losers not yet working
+ * Newsfeed commentary not yet working on competition view page
+ * Emails look ugly and don't show enough information
+ * No edit functions exposed for editing racers and editing competitions
+ * No delete functions exposed for deleting racers and deleting competitions
+   and deleting updates
+ * No health tips shown on the email
+ * No about page explaining nature of project, open source contribution links,
+   and Oxygen iconset licensing
+ * No UATs. These need to be written so we can confidently refactor messy
+   delivery code.
+ * No default mysql schema logged.
