@@ -14,6 +14,10 @@
 
         <!-- Resolve dependencies -->
         <exec command="git submodule update --init --recursive" passthru="true" />
+        <exec command="rm composer.phar" passthru="true" />
+        <exec command="rm -rf vendor/" passthru="true" />
+        <exec command="curl -s https://getcomposer.org/installer | php" passthru="true" />
+        <exec command="php composer.phar install" passthru="true" />
 
         <!-- Copy over executable code -->
         <exec command="cp -r application/ ${builddir}/deploy/" passthru="true" />
@@ -26,6 +30,7 @@
         <exec command="cp -r modules/driver ${builddir}/deploy/modules/" passthru="true" />
         <exec command="cp -r modules/kostache ${builddir}/deploy/modules/" passthru="true" />
         <exec command="cp -r modules/errorpage ${builddir}/deploy/modules/" passthru="true" />
+        <exec command="cp -r vendor/ ${builddir}/deploy/" passthru="true" />
         <exec command="cp -r system/ ${builddir}/deploy/" passthru="true" />
         <exec command="cp -r robots.txt ${builddir}/deploy/" passthru="true" />
         <exec command="cp -r crossdomain.xml ${builddir}/deploy/" passthru="true" />
