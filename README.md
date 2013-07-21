@@ -9,6 +9,7 @@ WeightRace is a website for competitive weight loss.
  3. Verify `application/logs/` and `application/cache/` are writeable
  4. Configure everything in `application/config/*`
  5. Configure `application/bootstrap.php`
+ 6. Install DATABASE.sql
 
 ## Development
 
@@ -32,12 +33,6 @@ WeightRace is currently alpha software and so is incomplete. It is usable for
 testing purposes but the following features are missing:
 
  * Make deployment fully automated on live server
- * Document usage of composer on Welgam
- * Backport following fixes to boilerplate libraries:
-   - Phing should include composer
-   - Fix validation driver
-   - Add email driver
-   - Add email ssl and default to/from configurations
  * Remind me my login link feature not yet implemented
  * Homepage latest losers not yet working
  * Newsfeed commentary not yet working on competition view page
