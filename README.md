@@ -9,7 +9,7 @@ WeightRace is a website for competitive weight loss.
  3. Verify `application/logs/` and `application/cache/` are writeable
  4. Configure everything in `application/config/*`
  5. Configure `application/bootstrap.php`
- 6. Install DATABASE.sql
+ 6. Install `DATABASE.sql`
 
 ## Development
 
@@ -45,4 +45,3 @@ testing purposes but the following features are missing:
    and Oxygen iconset licensing
  * No UATs. These need to be written so we can confidently refactor messy
    delivery code.
- * No default mysql schema logged.
