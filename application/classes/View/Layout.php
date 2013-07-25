@@ -6,9 +6,9 @@ defined('SYSPATH') OR die('No direct script access.');
  */
 class View_Layout
 {
-    public $page_title = 'vtemplate';
-    public $meta_description = 'Your default page description';
-    public $meta_keywords = 'seo, keywords, go, here';
+    public $page_title = 'WeightRace: Competitive weight loss with friends';
+    public $meta_description = 'Compete with your friends to lose weight in a fun, easy and free way!';
+    public $meta_keywords = 'weightrace, weight, race, compete, lose, loss, gain, game, health, competition';
 
     /**
      * The base URL of the website.
