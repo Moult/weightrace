@@ -32,6 +32,7 @@ This software is open-source and free software. See `licenses/` for full text.
 WeightRace is currently alpha software and so is incomplete. It is usable for
 testing purposes but the following features are missing:
 
+ * Support for imperial system
  * Make deployment fully automated on live server
  * Remind me my login link feature not yet implemented
  * Homepage latest losers not yet working
