@@ -42,6 +42,11 @@ spl_autoload_register(array('Kohana', 'auto_load'));
 spl_autoload_register(function($class) { Kohana::auto_load($class, 'vendor/Welgam/Core/src'); });
 
 /**
+ * Load vendor applications.
+ */
+// spl_autoload_register(function($class) { Kohana::auto_load($class, 'vendor/App/Core/src'); });
+
+/**
  * Optionally, you can enable a compatibility auto-loader for use with
  * older modules that have not been updated for PSR-0.
  *
