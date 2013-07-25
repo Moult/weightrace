@@ -4,6 +4,7 @@
     <property name="appdir" value="${basedir}/application" />
     <property name="builddir" value="${basedir}/build" />
     <property name="deploydir" value="../../weightrace" />
+    <property name="chown" value="apache:apache" />
 
     <target name="clean" description="Prep project for CI">
         <exec command="rm -rf ${builddir}" passthru="true" />
@@ -66,6 +67,7 @@
         <exec command="mv ${builddir}/deploy/ ${deploydir}/" passthru="true" />
         <exec command="cp -r ${deploydir}_previous/application/config/*.php ${deploydir}/application/config/" passthru="true" />
         <exec command="rm -rf ${deploydir}_previous/" passthru="true" />
+        <exec command="chown -R ${chown} ${deploydir}/" passthru="true" />
     </target>
 
     <target name="package" description="Build and package for distribution">
