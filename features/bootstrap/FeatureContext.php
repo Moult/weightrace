@@ -101,4 +101,22 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext
         if ($width != $selector_width OR $height != $selector_height)
             throw new Exception('Element "'.$selector.'" is '.$selector_width.'x'.$selector_height.' instead of '.$width.'x'.$height);
     }
+
+    /**
+     * @Given /^there is no data in the system$/
+     */
+    public function thereIsNoDataInTheSystem()
+    {
+        DB::query(Database::DELETE, 'TRUNCATE TABLE `competitions`')->execute();
+    }
+
+    /**
+     * @Given /^I set the end date to (\d+) days from now$/
+     */
+    public function iSetTheEndDateToDaysFromNow($days)
+    {
+        $this->getSession()->evaluateScript(
+            'jQuery("input[name=end_date]").val("'.date('d/m/Y', strtotime('+'.$days.' day')).'")'
+        );
+    }
 }
