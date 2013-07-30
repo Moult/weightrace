@@ -43,7 +43,3 @@ testing purposes but the following features are missing:
  * No delete functions exposed for deleting racers and deleting competitions
    and deleting updates
  * No health tips shown on the email
- * No about page explaining nature of project, open source contribution links,
-   and Oxygen iconset licensing
- * No UATs. These need to be written so we can confidently refactor messy
-   delivery code.

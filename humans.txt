@@ -4,7 +4,13 @@
 # TEAM
 
     Name: Dion Moult
-    Role: Main developer
+    Role: Main developer and designer
+
+# CREDITS
+
+    Many thanks to the awesome Oxygen team for allowing their icons to be used.
+    You can get Oxygen at http://www.oxygen-icons.org/ under the LGPLv3.
+    See the LGPLv3 at http://www.gnu.org/licenses/lgpl.html
 
 # TECHNOLOGY COLOPHON
 
