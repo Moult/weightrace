@@ -6,12 +6,71 @@
 
 class Controller_Race extends Controller_Core
 {
+    private function the_racer_name_is_not_filled_out($racer_id)
+    {
+        return $this->request->post('racer'.$racer_id.'_name') === 'Name...'
+            OR $this->request->post('racer'.$racer_id.'_name') === NULL;
+    }
+
+    private function process_racers($competition_id, $previous_racer_id = NULL, $previous_racer_password = NULL)
+    {
+        $welgam_config = Kohana::$config->load('welgam');
+        $racer_errors = array();
+
+        for ($racer_id = 1; $racer_id <= 4; $racer_id++)
+        {
+            if ($this->the_racer_name_is_not_filled_out($racer_id))
+                continue;
+
+            $competition = new Welgam\Core\Data\Competition;
+            $competition->id = $competition_id;
+
+            $racer = new Welgam\Core\Data\Racer;
+            $racer->name = $this->request->post('racer'.$racer_id.'_name');
+            $racer->email = $this->request->post('racer'.$racer_id.'_email');
+            $racer->weight = $this->request->post('racer'.$racer_id.'_weight');
+            $racer->height = $this->request->post('racer'.$racer_id.'_height');
+            $racer->male = (bool) $this->request->post('racer'.$racer_id.'_gender');
+            $racer->race = $welgam_config['ethnicity_ids'][$this->request->post('racer'.$racer_id.'_ethnicity')];
+            $racer->goal_weight = $this->request->post('racer'.$racer_id.'_goal_weight');
+            $racer->competition = $competition;
+
+            $racer_registrant = new Welgam\Core\Data\Racer;
+            if ($previous_racer_id !== NULL AND $previous_racer_password !== NULL)
+            {
+                $racer_registrant->id = $previous_racer_id;
+                $racer_registrant->password = $previous_racer_password;
+            }
+
+            $usecase = new Welgam\Core\Usecase\Racer\Add(
+                ['racer' => $racer, 'racer_registrant' => $racer_registrant],
+                ['racer_add' => new Repository_Racer_Add],
+                ['emailer' => new Tool_Emailer, 'formatter' => new Tool_Formatter, 'validator' => new Tool_Validator]
+            );
+
+            try
+            {
+                list($previous_racer_id, $previous_racer_password) = $usecase->fetch()->interact();
+            }
+            catch (Welgam\Core\Exception\Validation $e)
+            {
+                $racer_errors[$racer_id] = $e->get_errors();
+            }
+        }
+
+        return array($racer_errors, $previous_racer_id, $previous_racer_password);
+    }
+
     public function action_create()
     {
-        if ($this->request->method() === HTTP_Request::POST)
+        if ($this->request->method() === HTTP_Request::POST
+            AND $this->request->post('submit') === 'Send me my login')
         {
-            $validator = new Tool_Validator;
-
+            // Do something
+            die('not yet implemented');
+        }
+        elseif ($this->request->method() === HTTP_Request::POST)
+        {
             $competition = new Welgam\Core\Data\Competition;
             $competition->name = $this->request->post('competition_name');
             $start_date = explode('/', $this->request->post('start_date'));
@@ -22,7 +81,7 @@ class Controller_Race extends Controller_Core
             $usecase = new Welgam\Core\Usecase\Competition\Add(
                 ['competition' => $competition],
                 ['competition_add' => new Repository_Competition_Add],
-                ['validator' => $validator]
+                ['validator' => new Tool_Validator]
             );
 
             foreach ($this->request->post() as $key => $value)
@@ -47,72 +106,6 @@ class Controller_Race extends Controller_Core
 
             $this->redirect(Route::get('view')->uri(array('competition_id' => $competition_id, 'racer_id' => $previous_racer_id, 'racer_password' => $previous_racer_password)));
         }
-    }
-
-    private function process_racers($competition_id, $previous_racer_id = NULL, $previous_racer_password = NULL)
-    {
-        $emailer = new Tool_Emailer;
-        $formatter = new Tool_Formatter;
-        $validator = new Tool_Validator;
-
-        // Add as many racers as possible
-        $racer_errors = array();
-
-        for ($i = 1; $i < 5; $i++) {
-            if ($this->request->post('racer'.$i.'_name') !== 'Name...'
-                AND $this->request->post('racer'.$i.'_name') !== NULL)
-            {
-                $competition = new Welgam\Core\Data\Competition;
-                $competition->id = $competition_id;
-                $racer = new Welgam\Core\Data\Racer;
-                $racer->name = $this->request->post('racer'.$i.'_name');
-                $racer->email = $this->request->post('racer'.$i.'_email');
-                $racer->weight = $this->request->post('racer'.$i.'_weight');
-                $racer->height = $this->request->post('racer'.$i.'_height');
-                $racer->male = (bool) $this->request->post('racer'.$i.'_gender');
-                if ($this->request->post('racer'.$i.'_ethnicity') === 'asian')
-                {
-                    $racer->race = 0;
-                }
-                elseif ($this->request->post('racer'.$i.'_ethnicity') === 'hispanic')
-                {
-                    $racer->race = 1;
-                }
-                elseif ($this->request->post('racer'.$i.'_ethnicity') === 'black')
-                {
-                    $racer->race = 2;
-                }
-                elseif ($this->request->post('racer'.$i.'_ethnicity') === 'white')
-                {
-                    $racer->race = 3;
-                }
-                $racer->goal_weight = $this->request->post('racer'.$i.'_goal_weight');
-                $racer->competition = $competition;
-                $racer_registrant = new Welgam\Core\Data\Racer;
-                if ($previous_racer_id !== NULL AND $previous_racer_password !== NULL)
-                {
-                    $racer_registrant->id = $previous_racer_id;
-                    $racer_registrant->password = $previous_racer_password;
-                }
-
-                $usecase = new Welgam\Core\Usecase\Racer\Add(
-                    ['racer' => $racer, 'racer_registrant' => $racer_registrant],
-                    ['racer_add' => new Repository_Racer_Add],
-                    ['emailer' => $emailer, 'formatter' => $formatter, 'validator' => $validator]
-                );
-
-                try
-                {
-                    list($previous_racer_id, $previous_racer_password) = $usecase->fetch()->interact();
-                }
-                catch (Welgam\Core\Exception\Validation $e)
-                {
-                    $racer_errors[$i] = $e->get_errors();
-                }
-            }
-        }
-
-        return array($racer_errors, $previous_racer_id, $previous_racer_password);
     }
 
     public function action_view()
