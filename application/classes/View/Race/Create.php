@@ -37,27 +37,41 @@ class View_Race_Create extends View_Layout
     public $racer4_ethnicity = 'asian';
     public $stake = 'The loser will have to ...';
 
-    public function has_competition_errors()
+    public function has_errors()
     {
-        return (bool) isset($this->competition_errors);
+        return (bool) isset($this->errors);
     }
 
-    public function competition_name_error()
+    public function errors()
     {
-        return (bool) in_array('name', $this->competition_errors);
+        $error_messages = array();
+
+        foreach ($this->errors as $error)
+        {
+            if ($error === 'name')
+            {
+                $error_messages[] = ['error' => 'Please ensure you have a name for your challenge.'];
+            }
+            elseif ($error === 'start_date')
+            {
+                $error_messages[] = ['error' => 'Your competition start date cannot be in the past.'];
+            }
+            elseif ($error === 'end_date')
+            {
+                $error_messages[] = ['error' => 'Your competition end date should be after the start date.'];
+            }
+            elseif ($error === 'email')
+            {
+                $error_messages[] = ['error' => 'You need to provide a valid email address.'];
+            }
+            elseif ($error === 'participant')
+            {
+                $error_messages[] = ['error' => 'You do not seem to be a participant in any competitions.'];
+            }
+        }
+
+        return $error_messages;
     }
-
-    public function competition_start_date_error()
-    {
-        return (bool) in_array('start_date', $this->competition_errors);
-    }
-
-
-    public function competition_end_date_error()
-    {
-        return (bool) in_array('end_date', $this->competition_errors);
-    }
-
 
     public function racers()
     {

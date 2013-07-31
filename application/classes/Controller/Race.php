@@ -63,11 +63,33 @@ class Controller_Race extends Controller_Core
 
     public function action_create()
     {
+        $session = Session::instance();
+        $this->view->remind_success = $session->get_once('remind_success');
         if ($this->request->method() === HTTP_Request::POST
             AND $this->request->post('submit') === 'Send me my login')
         {
-            // Do something
-            die('not yet implemented');
+            $racer = new Welgam\Core\Data\Racer;
+            $racer->email = $this->request->post('email');
+            $usecase = new Welgam\Core\Usecase\Racer\Remind(
+                ['racer' => $racer],
+                ['racer_remind' => new Repository_Racer_Remind],
+                ['emailer' => new Tool_Emailer, 'formatter' => new Tool_Formatter, 'validator' => new Tool_Validator]
+            );
+
+            try
+            {
+                $usecase->fetch()->interact();
+                $session->set('remind_success', TRUE);
+                $this->redirect();
+            }
+            catch (Welgam\Core\Exception\Validation $e)
+            {
+                $this->view->errors = $e->get_errors();
+            }
+            catch (Welgam\Core\Exception\Authorisation $e)
+            {
+                $this->view->errors = array('participant');
+            }
         }
         elseif ($this->request->method() === HTTP_Request::POST)
         {
@@ -95,7 +117,7 @@ class Controller_Race extends Controller_Core
             }
             catch (Welgam\Core\Exception\Validation $e)
             {
-                return $this->view->competition_errors = $e->get_errors();
+                return $this->view->errors = $e->get_errors();
             }
 
             list($racer_errors, $previous_racer_id, $previous_racer_password) = $this->process_racers($competition_id);

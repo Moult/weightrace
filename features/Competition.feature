@@ -38,7 +38,7 @@ Feature: Competition
         And I press "Ready. Set. Go"
         Then I should be on the homepage
         And I should see "Uh oh!"
-        And I should see "You have named your challenge"
+        And I should see "Please ensure you have a name for your challenge."
 
     Scenario: Create a competition with bad racer data
         Given there is no data in the system

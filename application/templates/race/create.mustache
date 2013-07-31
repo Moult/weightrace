@@ -23,25 +23,26 @@
     <form action="" method="post">
         <label for="competition_name">Name your challenge now:</label>
         <input type="text" name="competition_name" value="{{competition_name}}">
-        {{#has_competition_errors}}
-        <div class="error">
+        {{#remind_success}}
+        <div class="notification success">
             <p>
-                Uh oh! We've had some problems trying to create your competition.
-                Please make sure that:
+                All right, we've sent you your competition access details.
+                Please check your email for further instructions.
+            </p>
+        </div>
+        {{/remind_success}}
+        {{#has_errors}}
+        <div class="notification error">
+            <p>
+                Uh oh! We've had some issues. Please check the following:
             </p>
             <ul>
-                {{#competition_name_error}}
-                <li>You have named your challenge</li>
-                {{/competition_name_error}}
-                {{#competition_start_date_error}}
-                <li>Your competition start date is not in the past</li>
-                {{/competition_start_date_error}}
-                {{#competition_end_date_error}}
-                <li>Your competition end date is after the start date</li>
-                {{/competition_end_date_error}}
+                {{#errors}}
+                <li>{{error}}</li>
+                {{/errors}}
             </ul>
         </div>
-        {{/has_competition_errors}}
+        {{/has_errors}}
         <h3>
             Prepare your contestants (up to 4)
         </h3>
