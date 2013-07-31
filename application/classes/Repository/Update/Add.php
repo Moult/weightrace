@@ -93,4 +93,22 @@ class Repository_Update_Add implements Welgam\Core\Usecase\Update\Add\Repository
             ->execute();
         return array($result->get('date'), $result->get('weight'));
     }
+
+    /**
+     * @return array($start_date_yyyymmdd, $end_date_yyyymmdd)
+     */
+    public function get_competition_start_and_end_date($racer_id)
+    {
+        $result = DB::select(
+                array('competitions.start_date', 'start_date'),
+                array('competitions.end_date', 'end_date')
+            )
+            ->from('racers')
+            ->join('competitions')
+            ->on('racers.competition', '=', 'competitions.id')
+            ->where('racers.id', '=', $racer_id)
+            ->limit(1)
+            ->execute();
+        return array($result->get('start_date'), $result->get('end_date'));
+    }
 }
