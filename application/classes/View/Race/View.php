@@ -136,12 +136,12 @@ class View_Race_View extends View_Layout
 
     public function max_value()
     {
-        return ceil($this->max_value / 10) * 10;
+        return (ceil($this->max_value / 10) * 10) + 10;
     }
 
     public function min_value()
     {
-        return floor($this->min_value / 10) * 10;
+        return (floor($this->min_value / 10) * 10) - 10;
     }
 
     public function competition_name()
