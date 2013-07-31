@@ -35,7 +35,6 @@ testing purposes but the following features are missing:
  * Support for imperial system
  * Switch to projected weight loss line
  * Trophy based on projected weight loss line
- * Remind me my login link feature not yet implemented
  * Homepage latest losers not yet working
  * Newsfeed commentary not yet working on competition view page
  * Emails look ugly and don't show enough information
