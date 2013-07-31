@@ -45,7 +45,7 @@ class View_Race_View extends View_Layout
         {
             $javascript .= "data.addColumn('number', '".$racer['name']."');\n";
             $javascript .= "data.addColumn({type:'boolean',role:'emphasis'});\n";
-            $javascript .= "data.addColumn('number', '".$racer['name']." Goal');\n";
+            $javascript .= "data.addColumn('number', '".$racer['name']." Trajectory');\n";
             $javascript .= "data.addColumn({type:'boolean',role:'certainty'});\n";
         }
         return $javascript;
@@ -111,7 +111,11 @@ class View_Race_View extends View_Layout
                     $row_data[] = '';
                 }
                 $row_data[] = 'true';
-                if ($day === 0 OR $day === $days - 1)
+                if ($day === 0)
+                {
+                    $row_data[] = $racer['weight'];
+                }
+                elseif ($day === $days - 1)
                 {
                     $row_data[] = $racer['goal_weight'];
                 }
