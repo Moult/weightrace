@@ -4,7 +4,7 @@
  * Full license text in LICENSE file
  */
 
-class View_Race_View extends View_Layout
+class View_View_Display extends View_Layout
 {
     public $racer1_name = 'Name...';
     public $racer1_weight = 'Weight in kg...';

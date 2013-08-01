@@ -83,8 +83,7 @@ section#racers form{text-align:center;}
 section#racers form label{display:none}
 section#racers form input{border:none;background:#ebebeb;border-bottom:1px solid #ccc;width:212px;font-size:12px;display:block;padding:0;padding-top:5px;padding-bottom:5px;padding-left:5px;padding-right:5px}
 section#racers form input:nth-of-type(odd){background:#f0f0f0}
-section#racers form button{background:transparent;border:0;font-size:12px;font-weight:bold;height:30px;color:#444;}
-section#racers form button img{margin-right:5px;margin-top:-2px}
+section#racers form input[type=submit]{background:transparent;border:0;font-size:12px;font-weight:bold;height:30px;color:#444;background-image:url("../images/add.png");background-repeat:no-repeat;background-position:40px 7px}
 section#racers form select{font-size:12px}
 section#racers ul{list-style-type:none;padding:0;}
 section#racers ul li{background-color:#eee;width:222px;margin-left:30px;float:left;}

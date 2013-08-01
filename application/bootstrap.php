@@ -135,16 +135,23 @@ Kohana::modules(array(
  */
 Route::set('homepage', '')
     ->defaults(array(
-        'controller' => 'race',
-        'action'     => 'create',
+        'controller' => 'create',
+        'action'     => 'display',
     ));
 
 Route::set('view', 'view/<competition_id>(/<racer_id>/<racer_password>)', array('competition_id' => '[0-9]*', 'racer_id' => '[0-9]*', 'racer_password' => '.*'))
     ->defaults(array(
-        'controller' => 'race',
-        'action'     => 'view',
+        'controller' => 'view',
+        'action'     => 'display',
     ));
 
+Route::set('process racers', 'racers/process/<competition_id>(/<registrant_id>/<registrant_password>)')
+    ->defaults(array(
+        'controller' => 'racers',
+        'action'     => 'process',
+        'registrant_id' => NULL,
+        'registrant_password' => NULL
+    ));
 
 /**
  * CMS module routes

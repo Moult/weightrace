@@ -4,7 +4,7 @@ defined('SYSPATH') OR die('No direct script access.');
 /**
  * Shows site index / homepage.
  */
-class View_Race_Create extends View_Layout
+class View_Create_Display extends View_Layout
 {
     public $competition_name = 'Flabicide 2013';
     public $racer1_name = 'Name...';
@@ -37,16 +37,22 @@ class View_Race_Create extends View_Layout
     public $racer4_ethnicity = 'asian';
     public $stake = 'The loser will have to ...';
 
+    public function remind_success()
+    {
+        $session = Session::instance();
+        return $session->get_once('remind_success');
+    }
+
     public function has_errors()
     {
-        return (bool) isset($this->errors);
+        return (bool) Session::instance()->get('errors');
     }
 
     public function errors()
     {
         $error_messages = array();
-
-        foreach ($this->errors as $error)
+        $errors = Session::instance()->get_once('errors');
+        foreach ($errors as $error)
         {
             if ($error === 'name')
             {
