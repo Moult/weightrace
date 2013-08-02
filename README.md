@@ -32,11 +32,9 @@ This software is open-source and free software. See `licenses/` for full text.
 WeightRace is currently alpha software and so is incomplete. It is usable for
 testing purposes but the following features are missing:
 
- * Track with Google Analytics
  * Homepage latest losers not yet working
  * Newsfeed commentary not yet working on competition view page
  * Emails look ugly and don't show enough information
  * No edit functions exposed for editing racers and editing competitions
  * No delete functions exposed for deleting racers and deleting competitions
    and deleting updates
- * No health tips shown on the email
