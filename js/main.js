@@ -38,19 +38,35 @@ $("input[name='stake']").blur( function() {
     }
 });
 
-$("input[name='update_weight']").focus( function() {
-    if ( $(this).val()=="Weight in kg...") {
-        $(this).val("");
-        $(this).css("color", "#444");
-    }
-});
+if (imperial) {
+    $("input[name='update_weight']").focus( function() {
+        if ( $(this).val()=="Weight in pounds...") {
+            $(this).val("");
+            $(this).css("color", "#444");
+        }
+    });
 
-$("input[name='update_weight']").blur( function() {
-    if ( $(this).val()=="") {
-        $(this).css("color", "#bbb");
-        $(this).val("Weight in kg...");
-    }
-});
+    $("input[name='update_weight']").blur( function() {
+        if ( $(this).val()=="") {
+            $(this).css("color", "#bbb");
+            $(this).val("Weight in pounds...");
+        }
+    });
+} else {
+    $("input[name='update_weight']").focus( function() {
+        if ( $(this).val()=="Weight in kg...") {
+            $(this).val("");
+            $(this).css("color", "#444");
+        }
+    });
+
+    $("input[name='update_weight']").blur( function() {
+        if ( $(this).val()=="") {
+            $(this).css("color", "#bbb");
+            $(this).val("Weight in kg...");
+        }
+    });
+}
 
 $("textarea[name='update_food']").focus( function() {
     if ( $(this).val()=="Today, I ate ... (optional)") {
@@ -68,7 +84,11 @@ $("textarea[name='update_food']").blur( function() {
 
 var racers = [ "racer1", "racer2", "racer3", "racer4" ];
 var fields = [ "name", "weight", "height", "goal_weight", "email" ];
-var fieldValues = [ "Name...", "Weight in kg...", "Height in cm...", "Goal weight in kg...", "Email..." ];
+if (imperial) {
+    var fieldValues = [ "Name...", "Weight in pounds...", "Height in inches...", "Goal weight in pounds...", "Email..." ];
+} else {
+    var fieldValues = [ "Name...", "Weight in kg...", "Height in cm...", "Goal weight in kg...", "Email..." ];
+}
 
 $.each(racers, function(i, racer) {
     $.each(fields, function(fieldIndex, fieldName) {

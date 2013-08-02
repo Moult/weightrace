@@ -43,6 +43,15 @@ google.setOnLoadCallback(drawVisualization);
 </header>
 <nav>
     <p><strong><a href="{{baseurl}}">WeightRace.net Alpha version</a></strong></p>
+    <form action="{{baseurl}}switch/" method="post">
+        <input type="hidden" value="{{currenturl}}" name="currenturl">
+        {{^imperial}}
+        <input type="submit" name="submit" value="Switch to Imperial">
+        {{/imperial}}
+        {{#imperial}}
+        <input type="submit" name="submit" value="Switch to Metric">
+        {{/imperial}}
+    </form>
     <button type="submit" id="bookmark">Bookmark this page for easy access</button>
     <p>Hello, <strong>{{auth_name}}</strong></p>
 </nav>
@@ -67,9 +76,16 @@ google.setOnLoadCallback(drawVisualization);
                 <h1>{{name}}</h1>
                 <p>
                     <strong>{{position}}</strong> place<br>
+                    {{#imperial}}
+                    <strong>{{current_weight}}</strong> pounds currently<br>
+                    <strong>{{goal}}</strong> pounds goal<br>
+                    <strong>{{weight_left}}</strong> pounds left<br>
+                    {{/imperial}}
+                    {{^imperial}}
                     <strong>{{current_weight}}</strong> kg currently<br>
                     <strong>{{goal}}</strong> kg goal<br>
-                    <strong>{{kg_left}}</strong> kg left<br>
+                    <strong>{{weight_left}}</strong> kg left<br>
+                    {{/imperial}}
                     <strong>{{awards}}</strong> awards<br>
                     <strong>{{points}}</strong> wobbly bits
                 </p>
@@ -127,7 +143,7 @@ google.setOnLoadCallback(drawVisualization);
     </h1>
     <form action="" method="post">
         <label for="update_weight">Today's weight</label>
-        <input type="text" name="update_weight" value="Weight in kg...">
+        <input type="text" name="update_weight" value="{{#imperial}}Weight in pounds...{{/imperial}}{{^imperial}}Weight in kg...{{/imperial}}">
         <label for="update_food">Food log</label>
         <textarea name="update_food">Today, I ate ... (optional)</textarea>
         <input type="submit" name="submit" value="Update my weight">

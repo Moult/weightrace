@@ -32,7 +32,7 @@ nav p:nth-of-type(2){float:right;margin-right:10px}
 nav form{margin-right:10px;height:50px;float:right}
 nav label{display:none}
 nav input{min-height:25px;max-height:25px;width:130px;-webkit-border-radius:5px;border-radius:5px;border:1px solid #333;background-color:#333;-webkit-box-shadow:0 0 1px 1px #000,inset 0 -1px 5px 1px #000;box-shadow:0 0 1px 1px #000,inset 0 -1px 5px 1px #000;font-size:12px;font-family:'Arial',sans-serif !important;color:#bbb;display:inline-block;padding:0;margin:0;margin-left:10px;margin-top:12px;padding-left:5px;padding-right:5px}
-nav input[type=submit],nav button{-webkit-border-radius:5px;border-radius:5px;color:#eee;display:inline-block;height:30px !important;min-height:25px;max-height:25px;background-color:#00a42b;border:1px solid #bbb;box-shadow:none;padding:0;margin:0;padding-left:5px;padding-right:5px;margin-left:10px;font-size:12px;font-family:'Arial',sans-serif !important}
+nav input[type=submit],nav button{-webkit-border-radius:5px;border-radius:5px;color:#eee;display:inline-block;height:30px !important;min-height:25px;max-height:25px;background-color:#00a42b;border:1px solid #bbb;box-shadow:none;padding:0;padding-left:5px;padding-right:5px;margin-left:10px;font-size:12px;font-family:'Arial',sans-serif !important}
 nav button{float:right;margin-right:10px;margin-left:0;margin-top:13px;text-shadow:none}
 section#register{width:978px;margin-left:auto;margin-right:auto;text-align:center;}
 section#register h2{text-shadow:0 0 20px #000;text-align:center;color:#fff;position:relative;margin-top:-175px;line-height:40px;font-size:30px;font-weight:normal}

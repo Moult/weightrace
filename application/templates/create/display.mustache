@@ -6,6 +6,15 @@
 </header>
 <nav>
     <p><strong><a href="{{baseurl}}">WeightRace.net Alpha version</a></strong></p>
+    <form action="{{baseurl}}switch/" method="post">
+        <input type="hidden" value="{{currenturl}}" name="currenturl">
+        {{^imperial}}
+        <input type="submit" name="submit" value="Switch to Imperial">
+        {{/imperial}}
+        {{#imperial}}
+        <input type="submit" name="submit" value="Switch to Metric">
+        {{/imperial}}
+    </form>
     <form action="" method="post">
         <p>Already have a competition but forgot your login?</p>
         <label for="email">

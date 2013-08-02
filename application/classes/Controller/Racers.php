@@ -32,11 +32,22 @@ class Controller_Racers extends Controller_Core
         $racer = new Welgam\Core\Data\Racer;
         $racer->name = $this->request->post('racer'.$racer_id.'_name');
         $racer->email = $this->request->post('racer'.$racer_id.'_email');
-        $racer->weight = $this->request->post('racer'.$racer_id.'_weight');
-        $racer->height = $this->request->post('racer'.$racer_id.'_height');
         $racer->male = (bool) $this->request->post('racer'.$racer_id.'_gender');
         $racer->race = $welgam_config['ethnicity_ids'][$this->request->post('racer'.$racer_id.'_ethnicity')];
-        $racer->goal_weight = $this->request->post('racer'.$racer_id.'_goal_weight');
+
+        if (Session::instance()->get('imperial', FALSE))
+        {
+            $racer->weight = $this->request->post('racer'.$racer_id.'_weight') * 0.453592;
+            $racer->height = $this->request->post('racer'.$racer_id.'_height') * 2.54;
+            $racer->goal_weight = $this->request->post('racer'.$racer_id.'_goal_weight') * 0.453592;
+        }
+        else
+        {
+            $racer->weight = $this->request->post('racer'.$racer_id.'_weight');
+            $racer->height = $this->request->post('racer'.$racer_id.'_height');
+            $racer->goal_weight = $this->request->post('racer'.$racer_id.'_goal_weight');
+        }
+
         $racer->competition = $competition;
 
         $racer_registrant = new Welgam\Core\Data\Racer;

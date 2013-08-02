@@ -7,7 +7,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{{baseurl}}js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-        <script>var baseurl = "{{baseurl}}";</script>
+        <script>var baseurl = "{{baseurl}}"; var imperial = {{#imperial}}true{{/imperial}}{{^imperial}}false{{/imperial}};</script>
         <script src="{{baseurl}}js/plugins.min.js"></script>
         <script src="{{baseurl}}js/main.min.js"></script>
 

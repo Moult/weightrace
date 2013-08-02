@@ -153,6 +153,12 @@ Route::set('process racers', 'racers/process/<competition_id>(/<registrant_id>/<
         'registrant_password' => NULL
     ));
 
+Route::set('switch unit', 'switch')
+    ->defaults(array(
+        'controller' => 'unit',
+        'action'     => 'switch'
+    ));
+
 /**
  * CMS module routes
  */

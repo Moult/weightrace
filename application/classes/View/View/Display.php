@@ -38,6 +38,30 @@ class View_View_Display extends View_Layout
     public $min_value = 1000;
     private $auth_racer = array('updates' => array());
 
+    public function __construct()
+    {
+        if ($this->imperial())
+        {
+            $this->racer1_weight = 'Weight in pounds...';
+            $this->racer1_height = 'Height in inches...';
+            $this->racer1_goal_weight = 'Goal weight in pounds...';
+            $this->racer2_weight = 'Weight in pounds...';
+            $this->racer2_height = 'Height in inches...';
+            $this->racer2_goal_weight = 'Goal weight in pounds...';
+            $this->racer3_weight = 'Weight in pounds...';
+            $this->racer3_height = 'Height in inches...';
+            $this->racer3_goal_weight = 'Goal weight in pounds...';
+            $this->racer4_weight = 'Weight in pounds...';
+            $this->racer4_height = 'Height in inches...';
+            $this->racer4_goal_weight = 'Goal weight in pounds...';
+        }
+    }
+
+    public function imperial()
+    {
+        return Session::instance()->get('imperial', FALSE);
+    }
+
     public function add_columns()
     {
         $javascript = '';
@@ -194,6 +218,11 @@ class View_View_Display extends View_Layout
         return FALSE;
     }
 
+    private function kg_to_pounds($kg)
+    {
+        return $kg * 2.20462;
+    }
+
     public function racers()
     {
         $racers = array();
@@ -210,7 +239,7 @@ class View_View_Display extends View_Layout
         {
             if ($racer['updates'][0]['id'] === NULL)
             {
-                $kg_left = abs($racer['weight'] - $racer['goal_weight']);
+                $weight_left = abs($racer['weight'] - $racer['goal_weight']);
                 $awards = 0;
                 $points = 0;
                 $current_weight = $racer['weight'];
@@ -234,17 +263,23 @@ class View_View_Display extends View_Layout
                         $total_points += $trophy_worth[$award];
                     }
                 }
-                $kg_left = abs($racer['goal_weight'] - $latest_update['weight']);
+                $weight_left = abs($racer['goal_weight'] - $latest_update['weight']);
                 $awards = $total_awards;
                 $points = $total_points;
                 $current_weight = $latest_update['weight'];
             }
 
+            if (Session::instance()->get('imperial', FALSE))
+            {
+                $racer['goal_weight'] = $this->kg_to_pounds($racer['goal_weight']);
+                $weight_left = $this->kg_to_pounds($weight_left);
+                $current_weight = $this->kg_to_pounds($current_weight);
+            }
             $racers[] = array(
                 'name' => $racer['name'],
-                'goal' => (float) $racer['goal_weight'],
-                'kg_left' => $kg_left,
-                'current_weight' => (float) $current_weight,
+                'goal' => round((float) $racer['goal_weight'], 2),
+                'weight_left' => round($weight_left, 2),
+                'current_weight' => round((float) $current_weight, 2),
                 'awards' => $awards,
                 'points' => $points
             );

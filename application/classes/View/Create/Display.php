@@ -37,6 +37,30 @@ class View_Create_Display extends View_Layout
     public $racer4_ethnicity = 'asian';
     public $stake = 'The loser will have to ...';
 
+    public function __construct()
+    {
+        if ($this->imperial())
+        {
+            $this->racer1_weight = 'Weight in pounds...';
+            $this->racer1_height = 'Height in inches...';
+            $this->racer1_goal_weight = 'Goal weight in pounds...';
+            $this->racer2_weight = 'Weight in pounds...';
+            $this->racer2_height = 'Height in inches...';
+            $this->racer2_goal_weight = 'Goal weight in pounds...';
+            $this->racer3_weight = 'Weight in pounds...';
+            $this->racer3_height = 'Height in inches...';
+            $this->racer3_goal_weight = 'Goal weight in pounds...';
+            $this->racer4_weight = 'Weight in pounds...';
+            $this->racer4_height = 'Height in inches...';
+            $this->racer4_goal_weight = 'Goal weight in pounds...';
+        }
+    }
+
+    public function imperial()
+    {
+        return Session::instance()->get('imperial', FALSE);
+    }
+
     public function remind_success()
     {
         $session = Session::instance();
