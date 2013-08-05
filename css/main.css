@@ -100,8 +100,8 @@ section#update label{display:block}
 section#update input:first-of-type{text-align:center;margin-bottom:20px;width:222px;height:37px;-webkit-border-radius:10px;border-radius:10px;border:1px solid #fff;background:#ccc;background:-moz-linear-gradient(top,#ccc 0%,#fff 40%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ccc),color-stop(40%,#fff));background:-webkit-linear-gradient(top,#ccc 0%,#fff 40%);background:-o-linear-gradient(top,#ccc 0%,#fff 40%);background:-ms-linear-gradient(top,#ccc 0%,#fff 40%);background:linear-gradient(to bottom,#ccc 0%,#fff 40%);-webkit-box-shadow:0 0 1px 1px #dcdcdc,inset 0 -1px 5px 1px #e6e6e6;box-shadow:0 0 1px 1px #dcdcdc,inset 0 -1px 5px 1px #e6e6e6;line-height:50px;font-size:25px;color:#bbb;padding:10px}
 section#update textarea:first-of-type{width:390px;margin-bottom:20px;height:150px;-webkit-border-radius:10px;border-radius:10px;border:1px solid #fff;background-color:#eee;-webkit-box-shadow:0 0 1px 1px #dcdcdc,inset 0 -1px 5px 1px #e6e6e6;box-shadow:0 0 1px 1px #dcdcdc,inset 0 -1px 5px 1px #e6e6e6;font-size:14px;color:#bbb;padding:10px}
 section#update input[type=submit]{display:block;margin-left:auto;margin-right:auto;margin-top:20px;-webkit-border-radius:5px;border-radius:5px;color:#eee;padding:0;padding:10px;margin-bottom:30px;font-size:16px;font-size:28px;background:#25cb51;background:-moz-linear-gradient(top,#25cb51 0%,#00a42b 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#25cb51),color-stop(100%,#00a42b));background:-webkit-linear-gradient(top,#25cb51 0%,#00a42b 100%);background:-o-linear-gradient(top,#25cb51 0%,#00a42b 100%);background:-ms-linear-gradient(top,#25cb51 0%,#00a42b 100%);background:linear-gradient(to bottom,#25cb51 0%,#00a42b 100%);border:1px solid #fff;-webkit-border-radius:10px;border-radius:10px;-webkit-box-shadow:0 1px 0 5px rgba(0,0,0,0.3);box-shadow:0 1px 0 5px rgba(0,0,0,0.3)}
-section#rules{width:978px;margin-left:auto;margin-right:auto;}
-section#rules h1{color:#444;text-align:center;font-size:20px}
+section#rules{width:978px;margin-left:auto;margin-right:auto;clear:both;}
+section#rules h1{color:#444;text-align:center;font-size:20px;margin-top:30px}
 section#rules ul{padding:0;list-style-type:none;}
 section#rules ul li{float:left;width:222px;background-color:#eee;margin-left:30px;}
 section#rules ul li h2{font-size:16px;margin-left:10px;margin-right:10px}
@@ -112,6 +112,15 @@ section#rules ul li:first-child h2:before{content:'1'}
 section#rules ul li:nth-child(2) h2:before{content:'2'}
 section#rules ul li:nth-child(3) h2:before{content:'3'}
 section#rules ul li:nth-child(4) h2:before{content:'4'}
+section#options{clear:both;width:978px;margin-bottom:70px;overflow:hidden;margin-left:auto;margin-right:auto;}
+section#options h1{color:#444;text-align:center;font-size:20px;padding-top:30px}
+section#options div{width:484px}
+section#options div:nth-of-type(1){float:left;margin-right:5px}
+section#options div:nth-of-type(2){float:right;margin-left:5px}
+section#options .alert{background-color:#ffaeae;color:#600;padding:5px;-webkit-border-radius:5px;border-radius:5px}
+section#options label{display:none}
+section#options input{min-height:25px;max-height:25px;width:130px;-webkit-border-radius:5px;border-radius:5px;border:1px solid #ccc;background-color:#eee;font-size:12px;font-family:'Arial',sans-serif !important;color:#bbb;display:inline-block;padding:0;margin:0;margin-left:10px;margin-top:12px;padding-left:5px;padding-right:5px}
+section#options input[type=submit]{width:auto;-webkit-border-radius:5px;border-radius:5px;color:#fff;display:inline-block;height:30px !important;min-height:25px;max-height:25px;background-color:#00a42b;border:1px solid #005115;box-shadow:none;padding:0;padding-left:5px;padding-right:5px;margin-left:10px;font-size:12px;font-family:'Arial',sans-serif !important}
 section#awards{clear:both;width:978px;margin-left:auto;margin-right:auto;}
 section#awards h1{color:#444;text-align:center;font-size:20px;padding-top:30px}
 section#awards ul{padding:0;list-style-type:none;}
