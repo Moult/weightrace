@@ -38,3 +38,4 @@ testing purposes but the following features are missing:
  * No edit functions exposed for editing racers and editing competitions
  * No delete functions exposed for deleting racers and deleting competitions
    and deleting updates
+ * Add social media integration
