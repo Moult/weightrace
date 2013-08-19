@@ -81,43 +81,19 @@ class View_View_Display extends View_Layout
         $start_date = new DateTime(substr($this->data['start_date'], 0, 4).'-'.substr($this->data['start_date'], 4, 2).'-'.substr($this->data['start_date'], 6));
         $days = $end_date->diff($start_date)->days + 1;
 
+        $this->calculate_max_and_min_graph_values();
+
         foreach ($this->data['racers'] as $key => $racer)
         {
             $updates = array();
             foreach ($racer['updates'] as $update)
             {
                 $updates[$update['date']] = $update['weight'];
-                if ($update['weight'] > $this->max_value)
-                {
-                    $this->max_value = $update['weight'];
-                }
-                if ($update['weight'] < $this->min_value)
-                {
-                    $this->min_value = $update['weight'];
-                }
             }
             ${'racer'.$key.'_updates'} = $updates;
-
-            if ($racer['weight'] > $this->max_value)
-            {
-                $this->max_value = $racer['weight'];
-            }
-            if ($racer['goal_weight'] > $this->max_value)
-            {
-                $this->max_value = $racer['goal_weight'];
-            }
-            if ($racer['weight'] < $this->min_value)
-            {
-                $this->min_value = $racer['weight'];
-            }
-            if ($racer['goal_weight'] < $this->min_value)
-            {
-                $this->min_value = $racer['goal_weight'];
-            }
         }
 
         $rows = array();
-
         $date = $start_date;
         for ($day = 0; $day < $days; $day++)
         {
@@ -128,7 +104,14 @@ class View_View_Display extends View_Layout
             {
                 if (array_key_exists($date->format('Ymd'), ${'racer'.$key.'_updates'}))
                 {
-                    $row_data[] = (float) ${'racer'.$key.'_updates'}[$date->format('Ymd')];
+                    if (Session::instance()->get('imperial', FALSE))
+                    {
+                        $row_data[] = round( (float) $this->kg_to_pounds(${'racer'.$key.'_updates'}[$date->format('Ymd')]), 2);
+                    }
+                    else
+                    {
+                        $row_data[] = round( (float) ${'racer'.$key.'_updates'}[$date->format('Ymd')], 2);
+                    }
                 }
                 else
                 {
@@ -137,11 +120,25 @@ class View_View_Display extends View_Layout
                 $row_data[] = 'true';
                 if ($day === 0)
                 {
-                    $row_data[] = $racer['weight'];
+                    if (Session::instance()->get('imperial', FALSE))
+                    {
+                        $row_data[] = round($this->kg_to_pounds($racer['weight']), 2);
+                    }
+                    else
+                    {
+                        $row_data[] = round($racer['weight'], 2);
+                    }
                 }
                 elseif ($day === $days - 1)
                 {
-                    $row_data[] = $racer['goal_weight'];
+                    if (Session::instance()->get('imperial', FALSE))
+                    {
+                        $row_data[] = round($this->kg_to_pounds($racer['goal_weight']), 2);
+                    }
+                    else
+                    {
+                        $row_data[] = round($racer['goal_weight'], 2);
+                    }
                 }
                 else
                 {
@@ -160,6 +157,56 @@ class View_View_Display extends View_Layout
             $javascript .= "[".implode(',', $row)."],\n";
         }
         return $javascript;
+    }
+
+    private function calculate_max_and_min_graph_values()
+    {
+        foreach ($this->data['racers'] as $racer)
+        {
+            $this->check_max_and_min_values_from_weight_updates($racer['updates']);
+            $this->check_max_and_min_values_from_racer_information($racer);
+
+            if (Session::instance()->get('imperial', FALSE))
+            {
+                $this->max_value = $this->kg_to_pounds($this->max_value);
+                $this->min_value = $this->kg_to_pounds($this->min_value);
+            }
+        }
+    }
+
+    private function check_max_and_min_values_from_weight_updates($updates)
+    {
+        foreach ($updates as $update)
+        {
+            if ($update['weight'] > $this->max_value)
+            {
+                $this->max_value = $update['weight'];
+            }
+            if ($update['weight'] < $this->min_value)
+            {
+                $this->min_value = $update['weight'];
+            }
+        }
+    }
+
+    private function check_max_and_min_values_from_racer_information($racer)
+    {
+        if ($racer['weight'] > $this->max_value)
+        {
+            $this->max_value = $racer['weight'];
+        }
+        if ($racer['goal_weight'] > $this->max_value)
+        {
+            $this->max_value = $racer['goal_weight'];
+        }
+        if ($racer['weight'] < $this->min_value)
+        {
+            $this->min_value = $racer['weight'];
+        }
+        if ($racer['goal_weight'] < $this->min_value)
+        {
+            $this->min_value = $racer['goal_weight'];
+        }
     }
 
     public function max_value()
