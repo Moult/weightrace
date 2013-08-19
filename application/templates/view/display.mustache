@@ -12,11 +12,16 @@ function drawVisualization() {
     {{{add_rows}}}
   ]);
 
+  var graphWidth = 978;
+  if (window.innerWidth <= 980) {
+      graphWidth = window.innerWidth * 0.9;
+  }
+
   // Create and draw the visualization.
   new google.visualization.LineChart(document.getElementById('visualization')).
       draw(data, {
         series:{3:{targetAxisIndex:1}},
-        width: 978, height: 300, lineWidth: 2, pointSize: 3, theme:'maximized', interpolateNulls: true,
+        width: graphWidth, height: 300, lineWidth: 2, pointSize: 3, theme:'maximized', interpolateNulls: true,
         colors:['#db1900','#db1900','#036f88','#036f88','#db6d00','#db6d00','#00A42B','#00A42B'],
         legend: { position: 'none' },
         vAxis: {maxValue: {{max_value}}, minValue:{{min_value}}}
@@ -42,7 +47,7 @@ google.setOnLoadCallback(drawVisualization);
     {{/has_started}}
 </header>
 <nav>
-    <p><strong><a href="{{baseurl}}">WeightRace.net Alpha version</a></strong></p>
+    <p><strong><a href="{{baseurl}}">WeightRace.net</a></strong></p>
     <form action="{{baseurl}}switch/" method="post">
         <input type="hidden" value="{{currenturl}}" name="currenturl">
         {{^imperial}}
@@ -129,7 +134,7 @@ google.setOnLoadCallback(drawVisualization);
 </section>
 {{#add_columns}}
 <section id="graph">
-    <div id="visualization" style="width: 978px; height: 300px;"></div>
+    <div id="visualization" style="height: 300px;"></div>
 </section>
 <section id="update">
     {{#has_updated}}

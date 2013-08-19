@@ -135,7 +135,32 @@ section#awards ul li:nth-child(5){background-image:url("../images/combo.png")}
 section#awards ul li:nth-child(6){background-image:url("../images/lead.png")}
 footer{font-size:10px;font-family:'Arial',sans-serif;color:#999;text-align:center;}
 footer a{color:#555}
-.ir{background-color:transparent;border:0;overflow:hidden;*text-indent:-9999px}
+@media screen and (max-width: 980px){nav form:nth-of-type(2){display:none}
+section#register,section#racers{width:auto;text-align:center;}
+section#register form fieldset,section#racers form fieldset,section#register form li,section#racers form li{margin-left:15px;margin-right:15px;display:inline-block;margin-bottom:15px;float:none}
+section#register form fieldset:first-of-type,section#racers form fieldset:first-of-type{margin-left:15px}
+section#register form input.longer,section#racers form input.longer{width:80%}
+section#racers form fieldset:first-of-type{margin-left:0}
+section#racers form li:first-child{margin-left:15px !important}
+section#graph,section#update,section#options{width:auto}
+section#options div:nth-of-type(1),section#options div:nth-of-type(2){width:auto;float:none;margin-left:20px;margin-right:20px}
+section#rules,section#awards{width:auto;text-align:center;}
+section#rules ul li:first-child,section#awards ul li:first-child{margin-left:15px}
+section#rules ul li,section#awards ul li{float:none;display:inline-block;margin-left:15px;margin-right:15px;margin-bottom:15px}
+}@media screen and (max-width: 720px){header{height:258px;}
+header img{display:none}
+nav button#bookmark{display:none}
+}@media screen and (max-width: 519px){header{height:208px}
+header#view p{font-size:15px}
+section#racers form fieldset:first-of-type{display:none}
+section#register h2{font-size:20px}
+section#register form label:first-child{font-size:20px}
+section#register form input:nth-child(2){width:auto}
+section#register form input.datepicker+span{display:block}
+section#register form input.datepicker+span:after,section#register form input.datepicker+span:before{display:none}
+section#register form input[type=submit]{width:auto}
+section#update textarea:first-of-type{width:80%}
+}.ir{background-color:transparent;border:0;overflow:hidden;*text-indent:-9999px}
 .ir:before{content:"";display:block;width:0;height:100%}
 .hidden{display:none !important;visibility:hidden}
 .visuallyhidden{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}
